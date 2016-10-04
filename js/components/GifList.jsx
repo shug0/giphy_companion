@@ -15,11 +15,11 @@ class GifList extends React.Component {
                 })}
 
                 {!loading && gifs.length === 0 &&
-                    <h3 className="error">Votre recherche n'a renvoyé aucun résultat</h3>
+                    <h3 className="message">Votre recherche n'a renvoyé aucun résultat</h3>
                 }
 
                 {loading &&
-                    <h3 className="error">Loading...</h3>
+                    <h3 className="message">Loading...</h3>
                 }
             </section>
         )

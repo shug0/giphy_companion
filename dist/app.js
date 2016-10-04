@@ -191,12 +191,12 @@ var GifList = function (_React$Component) {
                 }),
                 !loading && gifs.length === 0 && _react2.default.createElement(
                     'h3',
-                    { className: 'error' },
+                    { className: 'message' },
                     'Votre recherche n\'a renvoy\xE9 aucun r\xE9sultat'
                 ),
                 loading && _react2.default.createElement(
                     'h3',
-                    { className: 'error' },
+                    { className: 'message' },
                     'Loading...'
                 )
             );
