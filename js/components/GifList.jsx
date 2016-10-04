@@ -9,17 +9,17 @@ class GifList extends React.Component {
         const { gifs, loading } = this.props;
 
         return (
-            <section id="result">
+            <section id="result" className="GifList">
                 {gifs.length > 0 && gifs.map((item, index) => {
                     return <Gif imgSrc={item.images.downsized.url} key={'Gif' + index}/>
                 })}
 
                 {!loading && gifs.length === 0 &&
-                    <h3 className="message">Votre recherche n'a renvoyé aucun résultat</h3>
+                    <h3 className="GifList__message">Votre recherche n'a renvoyé aucun résultat</h3>
                 }
 
                 {loading &&
-                    <h3 className="message">Loading...</h3>
+                    <h3 className="GifList__message">Loading...</h3>
                 }
             </section>
         )

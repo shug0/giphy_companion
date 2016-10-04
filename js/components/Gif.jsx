@@ -6,7 +6,9 @@ class Gif extends React.Component {
             transitionDelay: this.props.index * 200 + 'ms'
         };
         return (
-            <img style={gifStyle} src={this.props.imgSrc} />
+            <span className="GifList__gif">
+                <img className="GifList__gif__img" style={gifStyle} src={this.props.imgSrc} />
+            </span>
         )
     }
 }

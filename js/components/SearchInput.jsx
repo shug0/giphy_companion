@@ -35,17 +35,17 @@ class SearchInput extends React.Component {
 
     render() {
         return (
-            <div className="wrapperInput">
+            <div className="SearchInputContainer">
                 {this.state.inputIsActive &&
-                    <div id="cross" onClick={this.crossClicked}></div>
+                    <div className="SearchInputContainer__clearButton" onClick={this.crossClicked}></div>
                 }
 
-                <input ref="searchInput"
+                    <input className="SearchInputContainer__input"
+                       ref="searchInput"
                        type="text"
-                       id="search"
                        onChange={this.searchChanged}
                        onKeyPress={this.enterPressed}
-                />
+                    />
             </div>
         )
     }

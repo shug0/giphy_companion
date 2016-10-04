@@ -80,8 +80,7 @@ var App = function (_React$Component) {
                 _react2.default.createElement(
                     'h1',
                     null,
-                    'Giphy Searcher ',
-                    _react2.default.createElement('i', { className: 'fa fa-search', 'aria-hidden': 'true' })
+                    'Giphy Searcher'
                 ),
                 _react2.default.createElement(_SearchInput2.default, {
                     searchChangedHandler: this.searchChangedHandler,
@@ -132,7 +131,11 @@ var Gif = function (_React$Component) {
             var gifStyle = {
                 transitionDelay: this.props.index * 200 + 'ms'
             };
-            return _react2.default.createElement('img', { style: gifStyle, src: this.props.imgSrc });
+            return _react2.default.createElement(
+                'span',
+                { className: 'GifList__gif' },
+                _react2.default.createElement('img', { className: 'GifList__gif__img', style: gifStyle, src: this.props.imgSrc })
+            );
         }
     }]);
 
@@ -185,18 +188,18 @@ var GifList = function (_React$Component) {
 
             return _react2.default.createElement(
                 'section',
-                { id: 'result' },
+                { id: 'result', className: 'GifList' },
                 gifs.length > 0 && gifs.map(function (item, index) {
                     return _react2.default.createElement(_Gif2.default, { imgSrc: item.images.downsized.url, key: 'Gif' + index });
                 }),
                 !loading && gifs.length === 0 && _react2.default.createElement(
                     'h3',
-                    { className: 'message' },
+                    { className: 'GifList__message' },
                     'Votre recherche n\'a renvoy\xE9 aucun r\xE9sultat'
                 ),
                 loading && _react2.default.createElement(
                     'h3',
-                    { className: 'message' },
+                    { className: 'GifList__message' },
                     'Loading...'
                 )
             );
@@ -274,11 +277,11 @@ var SearchInput = function (_React$Component) {
         value: function render() {
             return _react2.default.createElement(
                 'div',
-                { className: 'wrapperInput' },
-                this.state.inputIsActive && _react2.default.createElement('div', { id: 'cross', onClick: this.crossClicked }),
-                _react2.default.createElement('input', { ref: 'searchInput',
+                { className: 'SearchInputContainer' },
+                this.state.inputIsActive && _react2.default.createElement('div', { className: 'SearchInputContainer__clearButton', onClick: this.crossClicked }),
+                _react2.default.createElement('input', { className: 'SearchInputContainer__input',
+                    ref: 'searchInput',
                     type: 'text',
-                    id: 'search',
                     onChange: this.searchChanged,
                     onKeyPress: this.enterPressed
                 })

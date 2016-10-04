@@ -43,7 +43,7 @@ class App extends React.Component{
     render() {
         return (
             <main>
-                <h1>Giphy Searcher <i className="fa fa-search" aria-hidden="true"></i></h1>
+                <h1>Giphy Searcher</h1>
                 <SearchInput
                     searchChangedHandler={this.searchChangedHandler}
                     crossClickedHandler={this.crossClickedHandler} />
