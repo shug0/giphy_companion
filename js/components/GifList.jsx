@@ -19,7 +19,10 @@ class GifList extends React.Component {
                 }
 
                 {loading &&
-                    <h3 className="GifList__message">Loading...</h3>
+                    <h3 className="GifList__message">
+                        <i className="fa fa-circle-o-notch fa-spin fa-3x fa-fw"></i>
+                        <span className="sr-only">Loading...</span>
+                    </h3>
                 }
             </section>
         )
