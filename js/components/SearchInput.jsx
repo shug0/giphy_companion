@@ -31,6 +31,9 @@ class SearchInput extends React.Component {
     crossClicked() {
         this.refs.searchInput.value = "";
         this.props.crossClickedHandler();
+        this.setState({
+            inputIsActive: false
+        });
     }
 
     render() {

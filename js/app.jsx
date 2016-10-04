@@ -11,17 +11,21 @@ class App extends React.Component{
 
         this.state = {
             gifs: [],
-            loading: false
+            loading: false,
+            hasSearched: false,
+            favoritedGif: []
         };
 
         this.searchChangedHandler = this.searchChangedHandler.bind(this);
         this.crossClickedHandler = this.crossClickedHandler.bind(this);
+        this.onGifClicked = this.onGifClicked.bind(this);
     }
 
     searchChangedHandler(searchValue) {
         this.setState({
             gifs: [],
-            loading: true
+            loading: true,
+            hasSearched: true
         });
 
         const url = `http://api.giphy.com/v1/gifs/search?q=${searchValue}&api_key=dc6zaTOxFJmzC`;
@@ -36,22 +40,50 @@ class App extends React.Component{
 
     crossClickedHandler() {
         this.setState({
-            gifs: []
+            gifs: [],
+            hasSearched: false
         })
+    }
+
+    onGifClicked(imgProp) {
+        let newFavoritedGifs = this.state.favoritedGif;
+        let isFavoritedIndex = newFavoritedGifs.indexOf(imgProp.id);
+
+        if(isFavoritedIndex > -1) {
+            newFavoritedGifs.splice(isFavoritedIndex, 1);
+$       }
+        else {
+            newFavoritedGifs.push(imgProp.id);
+        }
+        this.setState({
+            favoritedGif: newFavoritedGifs
+        });
+
     }
 
     render() {
         return (
             <main>
-                <h1>Giphy Searcher</h1>
+                <header className="Header">
+                    <h1 className="Header__title">Giphy Searcher</h1>
+                </header>
+
                 <SearchInput
-                    searchChangedHandler={this.searchChangedHandler}
-                    crossClickedHandler={this.crossClickedHandler} />
-                <GifList gifs={this.state.gifs} loading={this.state.loading}/>
+                        searchChangedHandler={this.searchChangedHandler}
+                        crossClickedHandler={this.crossClickedHandler} />
+
+                <GifList
+                    gifs={this.state.gifs}
+                    favoritedGifs={this.state.favoritedGif}
+                    status={{
+                        loading: this.state.loading,
+                        hasSearched: this.state.hasSearched
+                    }}
+                    onGifClicked={this.onGifClicked}
+                />
             </main>
         )
     }
-
 }
 
 ReactDOM.render(
