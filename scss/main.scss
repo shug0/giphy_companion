@@ -73,13 +73,12 @@ body {
   min-height: 10em;
   padding: 2em;
   column-count: 4;
-  column-gap: 1em;
+  column-width: 20em;
   &__gif {
     display: block;
     position: relative;
     margin-bottom: 1em;
     width: 100%;
-
     &__img {
       position: relative;
       display: block;
