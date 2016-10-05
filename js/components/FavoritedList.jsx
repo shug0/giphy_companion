@@ -8,12 +8,6 @@ class FavoritedList extends React.Component {
         super();
     }
 
-    keyPressed(event) {
-        if (event.charCode === 27 && this.props.favoriteWindowIsOpen) {
-            this.closeFavoriteWindow();
-        }
-    }
-
     closeFavoriteWindow() {
         this.setState({
             favoritesIsOpen : false
@@ -48,7 +42,7 @@ class FavoritedList extends React.Component {
 
 
         return (
-            <section onKeyPress={this.keyPressed} className={favoriteWindowClass}>
+            <section className={favoriteWindowClass}>
                 <h2 className="FavoritedList__title">
                     {`${favoritedGifsElementsLength} favorite${favoritedGifsElementsLength > 1 ? 's' : ''}`}
                 </h2>

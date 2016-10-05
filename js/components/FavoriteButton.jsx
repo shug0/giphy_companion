@@ -12,7 +12,10 @@ class FavoriteButton extends React.Component {
 
         return (
             <button className="FavoriteButton" onClick={this.props.favoriteButtonIsClicked}>
-                {favoriteWindowIsOpen ? 'HIDE FAV' : 'SHOW FAV'}
+                {favoriteWindowIsOpen ?
+                    <i className="fa fa-times"/> :
+                    <i className="fa fa-star"/>
+                }
             </button>
         )
     }

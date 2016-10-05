@@ -24,6 +24,7 @@ class App extends React.Component{
         this.crossClickedHandler = this.crossClickedHandler.bind(this);
         this.onGifClicked = this.onGifClicked.bind(this);
         this.favoriteButtonIsClicked = this.favoriteButtonIsClicked.bind(this);
+        this.keyPressed = this.keyPressed.bind(this);
 
         this.bodyElement = document.querySelector('body');
     }
@@ -99,6 +100,12 @@ $       }
         });
     }
 
+    keyPressed(event) {
+        if (event.keyCode === 27 && this.state.favoriteWindowIsOpen) {
+            this.favoriteButtonIsClicked();
+        }
+    }
+
     render() {
 
         const {
@@ -110,7 +117,7 @@ $       }
         } = this.state;
 
         return (
-            <main>
+            <main onKeyDown={this.keyPressed}>
                 <header className="Header">
                     <h1 className="Header__title">Giphy Searcher</h1>
                 </header>

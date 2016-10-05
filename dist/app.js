@@ -56,6 +56,7 @@ var App = function (_React$Component) {
         _this.crossClickedHandler = _this.crossClickedHandler.bind(_this);
         _this.onGifClicked = _this.onGifClicked.bind(_this);
         _this.favoriteButtonIsClicked = _this.favoriteButtonIsClicked.bind(_this);
+        _this.keyPressed = _this.keyPressed.bind(_this);
 
         _this.bodyElement = document.querySelector('body');
         return _this;
@@ -144,6 +145,13 @@ var App = function (_React$Component) {
             });
         }
     }, {
+        key: 'keyPressed',
+        value: function keyPressed(event) {
+            if (event.keyCode === 27 && this.state.favoriteWindowIsOpen) {
+                this.favoriteButtonIsClicked();
+            }
+        }
+    }, {
         key: 'render',
         value: function render() {
             var _state = this.state;
@@ -156,7 +164,7 @@ var App = function (_React$Component) {
 
             return _react2.default.createElement(
                 'main',
-                null,
+                { onKeyDown: this.keyPressed },
                 _react2.default.createElement(
                     'header',
                     { className: 'Header' },
@@ -241,7 +249,7 @@ var FavoriteButton = function (_React$Component) {
             return _react2.default.createElement(
                 'button',
                 { className: 'FavoriteButton', onClick: this.props.favoriteButtonIsClicked },
-                favoriteWindowIsOpen ? 'HIDE FAV' : 'SHOW FAV'
+                favoriteWindowIsOpen ? _react2.default.createElement('i', { className: 'fa fa-times' }) : _react2.default.createElement('i', { className: 'fa fa-star' })
             );
         }
     }]);
@@ -290,13 +298,6 @@ var FavoritedList = function (_React$Component) {
     }
 
     _createClass(FavoritedList, [{
-        key: 'keyPressed',
-        value: function keyPressed(event) {
-            if (event.charCode === 27 && this.props.favoriteWindowIsOpen) {
-                this.closeFavoriteWindow();
-            }
-        }
-    }, {
         key: 'closeFavoriteWindow',
         value: function closeFavoriteWindow() {
             this.setState({
@@ -331,7 +332,7 @@ var FavoritedList = function (_React$Component) {
 
             return _react2.default.createElement(
                 'section',
-                { onKeyPress: this.keyPressed, className: favoriteWindowClass },
+                { className: favoriteWindowClass },
                 _react2.default.createElement(
                     'h2',
                     { className: 'FavoritedList__title' },
@@ -410,6 +411,7 @@ var Gif = function (_React$Component) {
                     'div',
                     { className: 'GifList__gif__mask' },
                     _react2.default.createElement('i', { onClick: this.favoriteClicked,
+                        tabIndex: this.props.index,
                         className: 'GifList__gif__mask__favButton fa fa-star', 'aria-hidden': 'true' })
                 ),
                 _react2.default.createElement('img', {
@@ -481,6 +483,7 @@ var GifList = function (_React$Component) {
                     return _react2.default.createElement(_Gif2.default, {
                         imgProp: item,
                         key: 'Gif' + index,
+                        index: index,
                         isFavorite: favoritedGifs.indexOf(item.id) > -1,
                         onGifClicked: _this2.props.onGifClicked
                     });

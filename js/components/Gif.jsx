@@ -27,6 +27,7 @@ class Gif extends React.Component {
             <span className={gifClass}>
                 <div className="GifList__gif__mask">
                     <i  onClick={this.favoriteClicked}
+                        tabIndex={this.props.index}
                         className="GifList__gif__mask__favButton fa fa-star" aria-hidden="true"/>
                 </div>
                 <img

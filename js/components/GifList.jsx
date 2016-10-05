@@ -25,6 +25,7 @@ class GifList extends React.Component {
                     return <Gif
                         imgProp={item}
                         key={'Gif' + index}
+                        index={index}
                         isFavorite={favoritedGifs.indexOf(item.id) > -1}
                         onGifClicked={this.props.onGifClicked}
                     />
