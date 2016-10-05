@@ -59,7 +59,7 @@ var App = function (_React$Component) {
             var _this2 = this;
 
             if (this.state.favoritedGifIds.length > 0) {
-                var url = 'http://api.giphy.com/v1/gifs?api_key=dc6zaTOxFJmzC&ids=' + this.state.favoritedGifIds.join(',');
+                var url = 'https://api.giphy.com/v1/gifs?api_key=dc6zaTOxFJmzC&ids=' + this.state.favoritedGifIds.join(',');
 
                 $.get(url, function (json) {
                     _this2.setState({
@@ -79,7 +79,7 @@ var App = function (_React$Component) {
                 hasSearched: true
             });
 
-            var url = 'http://api.giphy.com/v1/gifs/search?q=' + searchValue + '&api_key=dc6zaTOxFJmzC';
+            var url = 'https://api.giphy.com/v1/gifs/search?q=' + searchValue + '&api_key=dc6zaTOxFJmzC';
 
             $.get(url, function (json) {
                 _this3.setState({
