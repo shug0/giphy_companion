@@ -45,11 +45,7 @@ body {
     color: #999;
     border: none;
     box-shadow: 1px 3px 9px rgba(0,0,0,0.2);
-    padding: 0.3em 2em 0.3em 0.3em;
-    &:before {
-      content: 'f002';
-      font-family: "FontAwesome";
-    }
+    padding: 0.3em 2em 0.3em 1.9em;
   }
   &__clearButton {
     right: 0.4em;
@@ -77,6 +73,15 @@ body {
     &:after {
       transform: rotate(-45deg);
     }
+  }
+  &:before {
+    top: 0.6em;
+    left: 0.6em;
+    font-size: 1.7em;
+    position: absolute;
+    color: $oc-yellow-5;
+    content: '\f135';
+    font-family: "FontAwesome";
   }
 }
 
