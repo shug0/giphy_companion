@@ -232,7 +232,7 @@ var FavoriteButton = function (_React$Component) {
             return _react2.default.createElement(
                 'button',
                 { className: 'FavoriteButton', onClick: this.props.favoriteButtonIsClicked },
-                favoriteWindowIsOpen ? 'HIDE' : 'SHOW'
+                favoriteWindowIsOpen ? 'HIDE FAV' : 'SHOW FAV'
             );
         }
     }]);
