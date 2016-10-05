@@ -220,7 +220,7 @@ var App = function (_React$Component) {
 _reactDom2.default.render(_react2.default.createElement(
     _reactRouter.Router,
     { history: _reactRouter.browserHistory },
-    _react2.default.createElement(_reactRouter.Route, { path: '/', component: App })
+    _react2.default.createElement(_reactRouter.Route, { path: window.location.pathname, component: App })
 ), document.querySelector('#render'));
 
 },{"./components/FavoriteButton.jsx":2,"./components/FavoritedList.jsx":3,"./components/GifList.jsx":5,"./components/SearchInput.jsx":6,"react":242,"react-dom":10,"react-router":40}],2:[function(require,module,exports){

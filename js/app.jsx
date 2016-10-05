@@ -167,7 +167,7 @@ $       }
 
 ReactDOM.render(
     <Router history={browserHistory}>
-        <Route path="/" component={App} />
+        <Route path={window.location.pathname} component={App} />
     </Router>,
     document.querySelector('#render')
 );
