@@ -131,6 +131,7 @@ body {
   top: 2em;
   right: 2em;
   position: fixed;
+  z-index: 600;
 
 }
 
@@ -138,6 +139,7 @@ body {
   position: absolute;
   left: 0;
   top: 0;
+  z-index: 500;
   height: 100%;
   padding: 2em;
   background: $oc-gray-1;
