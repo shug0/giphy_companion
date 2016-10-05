@@ -56,6 +56,8 @@ var App = function (_React$Component) {
         _this.crossClickedHandler = _this.crossClickedHandler.bind(_this);
         _this.onGifClicked = _this.onGifClicked.bind(_this);
         _this.favoriteButtonIsClicked = _this.favoriteButtonIsClicked.bind(_this);
+
+        _this.bodyElement = document.querySelector('body');
         return _this;
     }
 
@@ -72,6 +74,13 @@ var App = function (_React$Component) {
                         favoritedGifs: json.data
                     });
                 });
+            }
+        }
+    }, {
+        key: 'componentDidUpdate',
+        value: function componentDidUpdate(prevProps, prevState) {
+            if (prevState.favoriteWindowIsOpen !== this.state.favoriteWindowIsOpen) {
+                this.bodyElement.style.overflow = this.state.favoriteWindowIsOpen ? 'hidden' : '';
             }
         }
     }, {
@@ -318,13 +327,15 @@ var FavoritedList = function (_React$Component) {
                 });
             });
 
+            var favoritedGifsElementsLength = favoritedGifsElements.length;
+
             return _react2.default.createElement(
                 'section',
                 { onKeyPress: this.keyPressed, className: favoriteWindowClass },
                 _react2.default.createElement(
                     'h2',
                     { className: 'FavoritedList__title' },
-                    'Favorites'
+                    favoritedGifsElementsLength + ' favorite' + (favoritedGifsElementsLength > 1 ? 's' : '')
                 ),
                 _react2.default.createElement(
                     'div',
@@ -489,7 +500,7 @@ var GifList = function (_React$Component) {
                         'Loading...'
                     )
                 ),
-                !loading && !hasNoResult && _react2.default.createElement(
+                !hasSearched && _react2.default.createElement(
                     'h2',
                     { className: 'GifList__message' },
                     '\xAF\\_(\u30C4)_/\xAF'

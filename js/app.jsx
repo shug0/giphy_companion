@@ -24,6 +24,8 @@ class App extends React.Component{
         this.crossClickedHandler = this.crossClickedHandler.bind(this);
         this.onGifClicked = this.onGifClicked.bind(this);
         this.favoriteButtonIsClicked = this.favoriteButtonIsClicked.bind(this);
+
+        this.bodyElement = document.querySelector('body');
     }
 
     componentDidMount() {
@@ -36,6 +38,12 @@ class App extends React.Component{
                     favoritedGifs: json.data
                 })
             })
+        }
+    }
+
+    componentDidUpdate(prevProps, prevState) {
+        if (prevState.favoriteWindowIsOpen !== this.state.favoriteWindowIsOpen) {
+            this.bodyElement.style.overflow = this.state.favoriteWindowIsOpen ? 'hidden' : '';
         }
     }
 

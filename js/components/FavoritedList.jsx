@@ -44,9 +44,14 @@ class FavoritedList extends React.Component {
                 />
             });
 
+        let favoritedGifsElementsLength = favoritedGifsElements.length;
+
+
         return (
             <section onKeyPress={this.keyPressed} className={favoriteWindowClass}>
-                <h2 className="FavoritedList__title">Favorites</h2>
+                <h2 className="FavoritedList__title">
+                    {`${favoritedGifsElementsLength} favorite${favoritedGifsElementsLength > 1 ? 's' : ''}`}
+                </h2>
                 <div className="FavoritedList__container">
                     {favoritedGifsElements}
                 </div>

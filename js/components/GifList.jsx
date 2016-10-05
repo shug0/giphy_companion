@@ -41,7 +41,7 @@ class GifList extends React.Component {
                     </h3>
                 }
 
-                {!loading && !hasNoResult &&
+                {!hasSearched &&
                 <h2 className="GifList__message">
                     ¯\_(ツ)_/¯
                 </h2>
