@@ -19,6 +19,7 @@ class SearchInput extends React.Component {
     enterPressed(event) {
         if (event.charCode === 13) {
             this.props.searchChangedHandler(this.refs.searchInput.value)
+            this.refs.searchInput.value.length === 0 && this.crossClicked();
         }
     }
 
@@ -26,6 +27,7 @@ class SearchInput extends React.Component {
         this.setState({
             inputIsActive: this.refs.searchInput.value.length > 0
         });
+
     }
 
     crossClicked() {

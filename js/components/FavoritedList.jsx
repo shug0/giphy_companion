@@ -1,15 +1,37 @@
 import React from 'react';
-
 import Gif from './Gif.jsx';
+import ClassName from 'classnames';
 
 class FavoritedList extends React.Component {
+
+    constructor() {
+        super();
+    }
+
+    keyPressed(event) {
+        if (event.charCode === 27 && this.props.favoriteWindowIsOpen) {
+            this.closeFavoriteWindow();
+        }
+    }
+
+    closeFavoriteWindow() {
+        this.setState({
+            favoritesIsOpen : false
+        });
+    }
 
     render() {
 
         const {
             favoritedGifs,
-            favoritedGifIds
+            favoritedGifIds,
+            favoriteWindowIsOpen
         } = this.props;
+
+        const favoriteWindowClass = ClassName(
+            'FavoritedList',
+            {'FavoritedList--isOpen' : favoriteWindowIsOpen}
+        );
 
         let favoritedGifsElements = favoritedGifs
             .filter(item => favoritedGifIds.indexOf(item.id) > -1)
@@ -23,8 +45,11 @@ class FavoritedList extends React.Component {
             });
 
         return (
-            <section className="FavoritedList GifList">
-                {favoritedGifsElements}
+            <section onKeyPress={this.keyPressed} className={favoriteWindowClass}>
+                <h2 className="FavoritedList__title">Favorites</h2>
+                <div className="FavoritedList__container">
+                    {favoritedGifsElements}
+                </div>
             </section>
         )
     }

@@ -4,6 +4,7 @@ import ReactDOM from 'react-dom';
 import SearchInput from './components/SearchInput.jsx';
 import GifList from './components/GifList.jsx';
 import FavoritedList from './components/FavoritedList.jsx';
+import FavoriteButton from './components/FavoriteButton.jsx';
 
 class App extends React.Component{
 
@@ -14,6 +15,7 @@ class App extends React.Component{
             gifs: [],
             loading: false,
             hasSearched: false,
+            favoriteWindowIsOpen: false,
             favoritedGifIds: JSON.parse(localStorage.getItem('favoritedGifsIds')) || [],
             favoritedGifs: []
         };
@@ -21,6 +23,7 @@ class App extends React.Component{
         this.searchChangedHandler = this.searchChangedHandler.bind(this);
         this.crossClickedHandler = this.crossClickedHandler.bind(this);
         this.onGifClicked = this.onGifClicked.bind(this);
+        this.favoriteButtonIsClicked = this.favoriteButtonIsClicked.bind(this);
     }
 
     componentDidMount() {
@@ -82,6 +85,12 @@ $       }
         this.setState(newState);
     }
 
+    favoriteButtonIsClicked() {
+        this.setState({
+            favoriteWindowIsOpen: !this.state.favoriteWindowIsOpen
+        });
+    }
+
     render() {
 
         const {
@@ -117,6 +126,12 @@ $       }
                     favoritedGifIds={favoritedGifIds}
                     favoritedGifs={favoritedGifs}
                     onGifClicked={this.onGifClicked}
+                    favoriteWindowIsOpen={this.state.favoriteWindowIsOpen}
+                />
+
+                <FavoriteButton
+                    favoriteButtonIsClicked={this.favoriteButtonIsClicked}
+                    favoriteWindowIsOpen={this.state.favoriteWindowIsOpen}
                 />
             </main>
         )

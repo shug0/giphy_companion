@@ -20,6 +20,7 @@ class GifList extends React.Component {
 
         return (
             <section id="result" className="GifList">
+
                 {gifs.length > 0 && gifs.map((item, index) => {
                     return <Gif
                         imgProp={item}
@@ -38,6 +39,12 @@ class GifList extends React.Component {
                         <i className="fa fa-circle-o-notch fa-spin fa-3x fa-fw" />
                         <span className="sr-only">Loading...</span>
                     </h3>
+                }
+
+                {!loading && !hasNoResult &&
+                <h2 className="GifList__message">
+                    ¯\_(ツ)_/¯
+                </h2>
                 }
             </section>
         )
