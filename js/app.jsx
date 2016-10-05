@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 
 import SearchInput from './components/SearchInput.jsx';
 import GifList from './components/GifList.jsx';
+import FavoritedList from './components/FavoritedList.jsx';
 
 class App extends React.Component{
 
@@ -13,12 +14,26 @@ class App extends React.Component{
             gifs: [],
             loading: false,
             hasSearched: false,
-            favoritedGif: []
+            favoritedGifIds: JSON.parse(localStorage.getItem('favoritedGifsIds')) || [],
+            favoritedGifs: []
         };
 
         this.searchChangedHandler = this.searchChangedHandler.bind(this);
         this.crossClickedHandler = this.crossClickedHandler.bind(this);
         this.onGifClicked = this.onGifClicked.bind(this);
+    }
+
+    componentDidMount() {
+
+        if (this.state.favoritedGifIds.length > 0) {
+            const url = 'http://api.giphy.com/v1/gifs?api_key=dc6zaTOxFJmzC&ids=' + this.state.favoritedGifIds.join(',');
+
+            $.get(url, (json) => {
+                this.setState({
+                    favoritedGifs: json.data
+                })
+            })
+        }
     }
 
     searchChangedHandler(searchValue) {
@@ -46,22 +61,37 @@ class App extends React.Component{
     }
 
     onGifClicked(imgProp) {
-        let newFavoritedGifs = this.state.favoritedGif;
-        let isFavoritedIndex = newFavoritedGifs.indexOf(imgProp.id);
+        let newFavoritedGifsIds = this.state.favoritedGifIds;
+        let isFavoritedIndex = newFavoritedGifsIds.indexOf(imgProp.id);
 
-        if(isFavoritedIndex > -1) {
-            newFavoritedGifs.splice(isFavoritedIndex, 1);
+        let newState = {};
+
+        if (isFavoritedIndex > -1) {
+            newState.favoritedGifs = this.state.favoritedGifs.filter(gif => gif.id !== imgProp.id);
+            newFavoritedGifsIds.splice(isFavoritedIndex, 1);
 $       }
         else {
-            newFavoritedGifs.push(imgProp.id);
+            newState.favoritedGifs = this.state.favoritedGifs.concat([imgProp]);
+            newFavoritedGifsIds.push(imgProp.id);
         }
-        this.setState({
-            favoritedGif: newFavoritedGifs
-        });
 
+        localStorage.setItem('favoritedGifsIds', JSON.stringify(newFavoritedGifsIds));
+
+        newState.favoritedGifIds = newFavoritedGifsIds;
+
+        this.setState(newState);
     }
 
     render() {
+
+        const {
+            gifs,
+            favoritedGifIds,
+            favoritedGifs,
+            loading,
+            hasSearched
+        } = this.state;
+
         return (
             <main>
                 <header className="Header">
@@ -70,15 +100,22 @@ $       }
 
                 <SearchInput
                         searchChangedHandler={this.searchChangedHandler}
-                        crossClickedHandler={this.crossClickedHandler} />
+                        crossClickedHandler={this.crossClickedHandler}
+                />
 
                 <GifList
-                    gifs={this.state.gifs}
-                    favoritedGifs={this.state.favoritedGif}
+                    gifs={gifs}
+                    favoritedGifs={favoritedGifIds}
                     status={{
-                        loading: this.state.loading,
-                        hasSearched: this.state.hasSearched
+                        loading: loading,
+                        hasSearched: hasSearched
                     }}
+                    onGifClicked={this.onGifClicked}
+                />
+
+                <FavoritedList
+                    favoritedGifIds={favoritedGifIds}
+                    favoritedGifs={favoritedGifs}
                     onGifClicked={this.onGifClicked}
                 />
             </main>
