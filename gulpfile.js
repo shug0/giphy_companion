@@ -38,7 +38,7 @@ gulp.task('styles', function () {
         .pipe(sass().on('error', sass.logError))
         .pipe(postcss([ autoprefixer({ browsers: ['last 2 versions'] }) ]))
         .pipe(cleanCSS({compatibility: 'ie8'}))
-        .pipe(gulp.dest(css_folder))
+        .pipe(gulp.dest('./dist'))
 });
 
 // -------------------------------------

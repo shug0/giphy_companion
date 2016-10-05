@@ -1,5 +1,5 @@
 import React from 'react';
-
+import { withRouter } from 'react-router';
 import { throttle } from '../utils';
 
 class SearchInput extends React.Component {
@@ -17,9 +17,16 @@ class SearchInput extends React.Component {
     }
 
     enterPressed(event) {
+
+        const searchInputValue  = this.refs.searchInput.value;
+
         if (event.charCode === 13) {
-            this.props.searchChangedHandler(this.refs.searchInput.value)
-            this.refs.searchInput.value.length === 0 && this.crossClicked();
+            this.props.searchChangedHandler(searchInputValue);
+            this.props.router.push('/?search=' + searchInputValue);
+
+            if (searchInputValue.length === 0) {
+                this.crossClicked();
+            }
         }
     }
 
@@ -45,16 +52,17 @@ class SearchInput extends React.Component {
                     <div className="SearchInputContainer__clearButton" onClick={this.crossClicked}></div>
                 }
 
-                    <input className="SearchInputContainer__input"
-                       ref="searchInput"
-                       type="text"
-                       onChange={this.searchChanged}
-                       onKeyPress={this.enterPressed}
-                    />
+                <input className="SearchInputContainer__input"
+                   ref="searchInput"
+                   type="text"
+                   onChange={this.searchChanged}
+                   onKeyPress={this.enterPressed}
+                   defaultValue={this.props.defaultSearch}
+                />
             </div>
         )
     }
 
 }
 
-export default SearchInput;
+export default withRouter(SearchInput);

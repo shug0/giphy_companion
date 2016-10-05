@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { Router, Route, browserHistory } from 'react-router';
 
 import SearchInput from './components/SearchInput.jsx';
 import GifList from './components/GifList.jsx';
@@ -39,6 +40,12 @@ class App extends React.Component{
                     favoritedGifs: json.data
                 })
             })
+        }
+
+        const { location: { query } } = this.props;
+
+        if (query.search) {
+            this.searchChangedHandler(query.search);
         }
     }
 
@@ -116,6 +123,10 @@ $       }
             hasSearched
         } = this.state;
 
+        const { location: { query } } = this.props;
+
+        const defaultSearch = query && query.search ? query.search : '';
+
         return (
             <main onKeyDown={this.keyPressed}>
                 <header className="Header">
@@ -123,8 +134,9 @@ $       }
                 </header>
 
                 <SearchInput
-                        searchChangedHandler={this.searchChangedHandler}
-                        crossClickedHandler={this.crossClickedHandler}
+                    defaultSearch={defaultSearch}
+                    searchChangedHandler={this.searchChangedHandler}
+                    crossClickedHandler={this.crossClickedHandler}
                 />
 
                 <GifList
@@ -154,6 +166,8 @@ $       }
 }
 
 ReactDOM.render(
-    <App />,
+    <Router history={browserHistory}>
+        <Route path="/" component={App} />
+    </Router>,
     document.querySelector('#render')
 );
