@@ -386,6 +386,7 @@ var Gif = function (_React$Component) {
         var _this = _possibleConstructorReturn(this, (Gif.__proto__ || Object.getPrototypeOf(Gif)).call(this));
 
         _this.favoriteClicked = _this.favoriteClicked.bind(_this);
+        _this.linkClicked = _this.linkClicked.bind(_this);
         return _this;
     }
 
@@ -393,6 +394,11 @@ var Gif = function (_React$Component) {
         key: 'favoriteClicked',
         value: function favoriteClicked() {
             this.props.onGifClicked(this.props.imgProp);
+        }
+    }, {
+        key: 'linkClicked',
+        value: function linkClicked() {
+            window.prompt("Enjoy your link", this.props.imgProp.url);
         }
     }, {
         key: 'render',
@@ -410,9 +416,15 @@ var Gif = function (_React$Component) {
                 _react2.default.createElement(
                     'div',
                     { className: 'GifList__gif__mask' },
-                    _react2.default.createElement('i', { onClick: this.favoriteClicked,
-                        tabIndex: this.props.index,
-                        className: 'GifList__gif__mask__favButton fa fa-star', 'aria-hidden': 'true' })
+                    _react2.default.createElement(
+                        'div',
+                        { className: 'GifList__gif__mask__container' },
+                        _react2.default.createElement('i', { onClick: this.favoriteClicked,
+                            tabIndex: this.props.index,
+                            className: 'GifList__gif__mask__container__favButton fa fa-star', 'aria-hidden': 'true' }),
+                        _react2.default.createElement('i', { onClick: this.linkClicked,
+                            className: 'GifList__gif__mask__container__favButton fa fa-link', 'aria-hidden': 'true' })
+                    )
                 ),
                 _react2.default.createElement('img', {
                     className: 'GifList__gif__img',
