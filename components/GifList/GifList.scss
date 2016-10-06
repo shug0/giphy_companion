@@ -14,22 +14,8 @@
     text-align: center;
   }
 }
-.GifList__gif__mask__container__favButton.fa-star {
+.GifList__gif--favorited .GifList__gif__mask__container__favButton.fa-star {
   color: $oc-yellow-5;
 }
-.GifList__gif:hover {
-  .GifList__gif__mask {
-    background: rgba(0, 0, 0, 0.5);
-    &__container__favButton {
-      opacity: 1;
-      visibility: visible;
-      &.fa-star:hover {
-        color: $oc-yellow-5;
-      }
-      &.fa-link:hover {
-        color: $oc-blue-5;
-      }
-    }
-  }
-}
+
 

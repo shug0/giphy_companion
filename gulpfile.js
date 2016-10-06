@@ -1,29 +1,27 @@
-var gulp = require('gulp');
-var sass = require('gulp-sass');
-var autoprefixer = require('autoprefixer');
-var postcss = require('gulp-postcss');
-var concat = require('gulp-concat');
-var cleanCSS = require('gulp-clean-css');
+const gulp = require('gulp');
+const sass = require('gulp-sass');
+const autoprefixer = require('autoprefixer');
+const postcss = require('gulp-postcss');
+const concat = require('gulp-concat');
+const cleanCSS = require('gulp-clean-css');
 const babel = require('gulp-babel');
 const browserify = require('browserify');
 const babelify = require('babelify');
 const source = require('vinyl-source-stream');
-var uglify = require('gulp-uglify');
-var pump = require('pump');
-var rename = require("gulp-rename");
-var browserSync = require('browser-sync').create();
+const uglify = require('gulp-uglify');
+const pump = require('pump');
+const rename = require("gulp-rename");
+const browserSync = require('browser-sync').create();
 
-var scss_files = 'components/**/*.scss';
-var jsx_files = 'components/**/*.jsx';
+const scss_main_file = 'components/main.scss';
+const scss_files_to_watch = 'components/**/*.scss';
+const jsx_main_file = 'components/**/*.jsx';
+const jsx_files_to_watch = 'components/**/*.jsx';
 
 
 gulp.task('babel', () => {
-    return browserify({
-        entries: 'components/app.jsx'
-    })
-    .transform(babelify.configure({
-        presets : ["es2015", "react"]
-    }))
+    return browserify({ entries: jsx_main_file })
+    .transform(babelify.configure({ presets : ["es2015", "react"] }))
     .bundle()
     .pipe(source("app.js"))
     .pipe(gulp.dest("./dist"))
@@ -31,13 +29,8 @@ gulp.task('babel', () => {
 });
 
 
-// -------------------------------------
-//   Task: Compile & minify SCSS
-// -------------------------------------
-
-
 gulp.task('styles', function () {
-    return gulp.src('components/main.scss')
+    return gulp.src(scss_main_file)
         .pipe(sass().on('error', sass.logError))
         .pipe(postcss([ autoprefixer({ browsers: ['last 2 versions'] }) ]))
         .pipe(cleanCSS({compatibility: 'ie8'}))
@@ -45,11 +38,8 @@ gulp.task('styles', function () {
         .pipe(browserSync.stream())
 });
 
-// -------------------------------------
-//   Task: Compile & minify SCSS & JS
-// -------------------------------------
 
-gulp.task('min', function (cb) {
+gulp.task('minifyJs', function (cb) {
     pump([
             gulp.src('dist/app.js'),
             uglify(),
@@ -71,6 +61,6 @@ gulp.task('browser-sync', function() {
 // -------------------------------------
 
 gulp.task('dev', ['browser-sync', 'styles', 'babel'], function() {
-    gulp.watch(scss_files, ['styles']);
-    gulp.watch(jsx_files, ['babel']);
+    gulp.watch(scss_files_to_watch, ['styles']);
+    gulp.watch(jsx_files_to_watch, ['babel']);
 });
