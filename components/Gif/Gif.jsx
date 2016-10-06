@@ -47,7 +47,7 @@ class Gif extends React.Component {
                 {hasPins &&
                 <div className="GifList__gif__pinsContainer">
                     {this.props.isFavorite &&
-                    <div className="GifList__gif__pinsContainer__pins GifList__gif__mask__container__pinsContainer__pins--favorite">
+                    <div className="GifList__gif__pinsContainer__pins">
                         <i className="fa fa-star"></i>
                     </div>
                     }

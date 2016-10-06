@@ -13,13 +13,13 @@ var pump = require('pump');
 var rename = require("gulp-rename");
 var browserSync = require('browser-sync').create();
 
-var scss_files = 'components/main.scss';
-var jsx_files = 'components/app.jsx';
+var scss_files = 'components/**/*.scss';
+var jsx_files = 'components/**/*.jsx';
 
 
 gulp.task('babel', () => {
     return browserify({
-        entries: [jsx_files]
+        entries: 'components/app.jsx'
     })
     .transform(babelify.configure({
         presets : ["es2015", "react"]
@@ -37,7 +37,7 @@ gulp.task('babel', () => {
 
 
 gulp.task('styles', function () {
-    return gulp.src(scss_files)
+    return gulp.src('components/main.scss')
         .pipe(sass().on('error', sass.logError))
         .pipe(postcss([ autoprefixer({ browsers: ['last 2 versions'] }) ]))
         .pipe(cleanCSS({compatibility: 'ie8'}))
@@ -72,5 +72,5 @@ gulp.task('browser-sync', function() {
 
 gulp.task('dev', ['browser-sync', 'styles', 'babel'], function() {
     gulp.watch(scss_files, ['styles']);
-    gulp.watch('js/**/*.jsx', ['babel']);
+    gulp.watch(jsx_files, ['babel']);
 });

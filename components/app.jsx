@@ -160,6 +160,11 @@ $       }
                     favoriteButtonIsClicked={this.favoriteButtonIsClicked}
                     favoriteWindowIsOpen={this.state.favoriteWindowIsOpen}
                 />
+
+                <footer className="Footer" >
+                    <a href="http://giphy.com"><img src="assets/powered_by_giphy.png" alt="Powered by Giphy"/></a>
+                </footer>
+
             </main>
         )
     }

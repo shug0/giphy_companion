@@ -19,7 +19,6 @@ body {
 
 }
 
-
 .Header {
   width: 100%;
   padding: 2em 2em 4em;
@@ -28,6 +27,16 @@ body {
     color: $oc-gray-7;
     text-align: center;
     font-weight: 100;
+  }
+}
+
+.Footer {
+  padding: 5em 2em;
+  img {
+    height: 3em;
+    width: auto;
+    display: block;
+    margin: auto;
   }
 }
 

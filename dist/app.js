@@ -229,7 +229,7 @@ var Gif = function (_React$Component) {
                     { className: 'GifList__gif__pinsContainer' },
                     this.props.isFavorite && _react2.default.createElement(
                         'div',
-                        { className: 'GifList__gif__pinsContainer__pins GifList__gif__mask__container__pinsContainer__pins--favorite' },
+                        { className: 'GifList__gif__pinsContainer__pins' },
                         _react2.default.createElement('i', { className: 'fa fa-star' })
                     )
                 )
@@ -638,7 +638,16 @@ var App = function (_React$Component) {
                 _react2.default.createElement(_FavoriteButton2.default, {
                     favoriteButtonIsClicked: this.favoriteButtonIsClicked,
                     favoriteWindowIsOpen: this.state.favoriteWindowIsOpen
-                })
+                }),
+                _react2.default.createElement(
+                    'footer',
+                    { className: 'Footer' },
+                    _react2.default.createElement(
+                        'a',
+                        { href: 'http://giphy.com' },
+                        _react2.default.createElement('img', { src: 'assets/powered_by_giphy.png', alt: 'Powered by Giphy' })
+                    )
+                )
             );
         }
     }]);
