@@ -21,8 +21,11 @@ class SearchInput extends React.Component {
 
         if (event.charCode === 13) {
             this.props.searchChangedHandler(searchInputValue);
-            this.props.router.push('/?search=' + searchInputValue);
-
+            
+            this.props.router.push({
+                search: '?search=' + searchInputValue
+            });
+            
             if (searchInputValue.length === 0) {
                 this.crossClicked();
             }
