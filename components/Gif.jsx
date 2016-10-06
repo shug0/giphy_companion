@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { PropTypes } from 'react';
 import ClassName from 'classnames';
 
 class Gif extends React.Component {
@@ -27,8 +27,10 @@ class Gif extends React.Component {
             {'GifList__gif--favorited' : this.props.isFavorite}
         );
 
+        const hasPins = this.props.isFavorite;
+
         return (
-            <span className={gifClass}>
+            <span className={gifClass} >
                 <div className="GifList__gif__mask">
                     <div className="GifList__gif__mask__container">
                         <i  onClick={this.favoriteClicked}
@@ -42,6 +44,15 @@ class Gif extends React.Component {
                     className="GifList__gif__img"
                     src={imgUrl}
                 />
+                {hasPins &&
+                <div className="GifList__gif__pinsContainer">
+                    {this.props.isFavorite &&
+                    <div className="GifList__gif__pinsContainer__pins GifList__gif__mask__container__pinsContainer__pins--favorite">
+                        <i className="fa fa-star"></i>
+                    </div>
+                    }
+                </div>
+                }
             </span>
         )
     }

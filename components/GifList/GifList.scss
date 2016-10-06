@@ -1,0 +1,79 @@
+.GifList {
+  padding: 2em;
+  column-count: 4;
+  column-width: 20em;
+  &__gif {
+    display: block;
+    position: relative;
+    margin-bottom: 1em;
+    background: black;
+    &__img {
+      position: relative;
+      display: block;
+      width: 100%;
+      height:auto;
+    }
+    &__pinsContainer {
+      bottom: 1em;
+      right: 1em;
+      position: absolute;
+      &__pins {
+        font-size: 1.2em;
+        border-radius: 50%;
+        background-color: #fff;
+        height: 2.5em;
+        width: 2.5em;
+        &--favorite {
+
+        }
+      }
+    }
+    &__mask {
+      width: 100%;
+      height: 100%;
+      background: transparent;
+      position: absolute;
+      z-index: 50;
+      &__container {
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        position: absolute;
+        &__favButton {
+          font-size: 2.4em !important;
+          visibility: hidden;
+          opacity: 0;
+          cursor: pointer;
+          padding: 0.5em;
+        }
+      }
+    }
+  }
+  &__message {
+    color: $oc-gray-5;
+    width: 100%;
+    font-weight: 100;
+    position: absolute;
+    left: 0;
+    text-align: center;
+  }
+}
+.GifList__gif__mask__container__favButton.fa-star {
+  color: $oc-yellow-5;
+}
+.GifList__gif:hover {
+  .GifList__gif__mask {
+    background: rgba(0, 0, 0, 0.5);
+    &__container__favButton {
+      opacity: 1;
+      visibility: visible;
+      &.fa-star:hover {
+        color: $oc-yellow-5;
+      }
+      &.fa-link:hover {
+        color: $oc-blue-5;
+      }
+    }
+  }
+}
+

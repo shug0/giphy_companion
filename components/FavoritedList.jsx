@@ -4,10 +4,6 @@ import ClassName from 'classnames';
 
 class FavoritedList extends React.Component {
 
-    constructor() {
-        super();
-    }
-
     closeFavoriteWindow() {
         this.setState({
             favoritesIsOpen : false

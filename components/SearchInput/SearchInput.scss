@@ -1,0 +1,54 @@
+
+// SearchInput.jsx
+.SearchInputContainer {
+  max-width: 50em;
+  width: 90%;
+  height: 3em;
+  margin: -2em auto 1em;
+  position: relative;
+  &__input {
+    width:100%;
+    font-size: 2em;
+    font-weight:100;
+    color: #999;
+    border: none;
+    box-shadow: 1px 3px 9px rgba(0,0,0,0.2);
+    padding: 0.3em 2em 0.3em 1.9em;
+  }
+  &__clearButton {
+    right: 0.4em;
+    top: 0.5em;
+    padding: 1.4em;
+    position: absolute;
+    height: 1em;
+    width: 1em;
+    &.hide {
+      opacity: 0;
+      display: none;
+    }
+    &:before, &:after {
+      position: absolute;
+      top: 0;
+      right: 50%;
+      background: $oc-gray-4;
+      content: '';
+      height: 100%;
+      width: 2px;
+    }
+    &:before {
+      transform: rotate(45deg);
+    }
+    &:after {
+      transform: rotate(-45deg);
+    }
+  }
+  &:before {
+    top: 0.6em;
+    left: 0.6em;
+    font-size: 1.7em;
+    position: absolute;
+    color: $oc-yellow-5;
+    content: '\f135';
+    font-family: "FontAwesome";
+  }
+}

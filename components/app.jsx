@@ -2,10 +2,10 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { Router, Route, browserHistory } from 'react-router';
 
-import SearchInput from './components/SearchInput.jsx';
-import GifList from './components/GifList.jsx';
-import FavoritedList from './components/FavoritedList.jsx';
-import FavoriteButton from './components/FavoriteButton.jsx';
+import SearchInput from './SearchInput/SearchInput.jsx';
+import GifList from './GifList/GifList.jsx';
+import FavoritedList from './FavoritedList/FavoritedList.jsx';
+import FavoriteButton from './FavoriteButton/FavoriteButton.jsx';
 
 class App extends React.Component{
 
