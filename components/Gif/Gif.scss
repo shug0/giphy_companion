@@ -1,0 +1,69 @@
+@import '../var.scss';
+
+.GifList__gif {
+  display: block;
+  position: relative;
+  margin-bottom: 1em;
+  background: black;
+  transition: ease all 0.2s;
+  &__img {
+    position: relative;
+    display: block;
+    width: 100%;
+    height:auto;
+  }
+  &__pinsContainer {
+    bottom: 1em;
+    right: 1em;
+    position: absolute;
+    &__pins {
+      border-radius: 50%;
+      background-color: white;
+      height: 2.5em;
+      width: 2.5em;
+      .fa {
+        font-size: 1.2em;
+        padding: 0.59em;
+      }
+      .fa-star {
+        color: $oc-yellow-5;
+      }
+    }
+  }
+  &__mask {
+    width: 100%;
+    height: 100%;
+    background: transparent;
+    position: absolute;
+    z-index: 50;
+    &__container {
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      position: absolute;
+      &__favButton {
+        font-size: 2em !important;
+        visibility: hidden;
+        opacity: 0;
+        cursor: pointer;
+        padding: 0.5em;
+      }
+    }
+  }
+}
+
+.GifList__gif:hover {
+  .GifList__gif__mask {
+    background: rgba(0, 0, 0, 0.5);
+    &__container__favButton {
+      opacity: 1;
+      visibility: visible;
+      &.fa-star:hover {
+        color: $oc-yellow-5;
+      }
+      &.fa-link:hover {
+        color: $oc-blue-5;
+      }
+    }
+  }
+}

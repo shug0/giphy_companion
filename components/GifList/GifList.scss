@@ -1,0 +1,23 @@
+@import '../var.scss';
+
+.GifList {
+  max-width: 1300px;
+  width: 90%;
+  margin: auto;
+  padding: 2em;
+  column-count: 4;
+  column-width: 15em;
+  &__message {
+    color: $oc-gray-5;
+    width: 100%;
+    font-weight: 100;
+    position: absolute;
+    left: 0;
+    text-align: center;
+  }
+}
+.GifList__gif--favorited .GifList__gif__mask__container__favButton.fa-star {
+  color: $oc-yellow-5;
+}
+
+

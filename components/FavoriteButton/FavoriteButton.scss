@@ -1,0 +1,18 @@
+.FavoriteButton {
+  top: 3em;
+  right: 3em;
+  height: 5em;
+  width: 5em;
+  border-radius: 50%;
+  position: fixed;
+  z-index: 600;
+  border: 0;
+  cursor: pointer;
+  .fa {
+    color: white;
+    font-size: 2.7em;
+  }
+  &:focus, &:hover {
+    transform: scale(1.1);
+  }
+}
