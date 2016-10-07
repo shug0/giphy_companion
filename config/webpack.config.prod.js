@@ -104,6 +104,10 @@ module.exports = {
         loader: 'babel',
         
       },
+      {
+        test: /\.scss/,
+        loader: ExtractTextPlugin.extract('style', 'css!sass!postcss')
+      },
       // The notation here is somewhat confusing.
       // "postcss" loader applies autoprefixer to our CSS.
       // "css" loader resolves paths in CSS and adds assets as dependencies.
@@ -116,6 +120,7 @@ module.exports = {
       // tags. If you use code splitting, however, any async bundles will still
       // use the "style" loader inside the async code so CSS from them won't be
       // in the main CSS file.
+      /*
       {
         test: /\.css$/,
         // "?-autoprefixer" disables autoprefixer in css-loader itself:
@@ -129,6 +134,7 @@ module.exports = {
         loader: ExtractTextPlugin.extract('style', 'css?-autoprefixer!postcss')
         // Note: this won't work without `new ExtractTextPlugin()` in `plugins`.
       },
+      */
       // JSON is not enabled by default in Webpack but both Node and Browserify
       // allow it implicitly so we also enable it.
       {
