@@ -137,6 +137,7 @@ function build(previousSizeMap) {
       console.log('To publish it at ' + chalk.green(homepagePath) + ', run:');
       console.log();
       console.log('  ' + chalk.cyan('git') + ' commit -am ' + chalk.yellow('"Save local changes"'));
+      console.log('  ' + chalk.cyan('git') + ' commit -am ' + chalk.yellow('"Save local changes"'));
       console.log('  ' + chalk.cyan('git') + ' checkout -B gh-pages');
       console.log('  ' + chalk.cyan('git') + ' add -f build');
       console.log('  ' + chalk.cyan('git') + ' commit -am ' + chalk.yellow('"Rebuild website"'));

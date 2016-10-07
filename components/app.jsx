@@ -133,7 +133,7 @@ class App extends React.Component{
         return (
             <main onKeyDown={this.keyPressed}>
                 <header className="Header">
-                    <h1 className="Header__title">Giphy Searcher</h1>
+                    <h1 className="Header__title">Giphy Companion</h1>
                 </header>
 
                 <SearchInput
