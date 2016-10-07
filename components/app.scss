@@ -15,12 +15,11 @@ body {
   min-height:100%;
   perspective: 1200px;
   position: relative;
-
 }
 
 .Header {
   width: 100%;
-  padding: 2em 2em 4em;
+  padding: 3em 2em 4em;
   background: $oc-gray-1;
   &__title {
     color: $oc-gray-7;
