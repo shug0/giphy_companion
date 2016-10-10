@@ -1,5 +1,9 @@
 # Giphy Companion
 
+Help your to quickly find a gif with a keyword and manage yours favorited gifs 🤗
+
+![alt tag](http://i.giphy.com/l2SqeZRceZHENmH2U.gif)
+
 This project was bootstrapped with [Create React App](https://github.com/facebookincubator/create-react-app).
 
 You can find more information and check the most recent version of this guide [here](https://github.com/facebookincubator/create-react-app/blob/master/packages/react-scripts/template/README.md).
