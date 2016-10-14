@@ -4,6 +4,8 @@ Help your to quickly find a gif with a keyword and manage yours favorited gifs ð
 
 ![alt tag](http://i.giphy.com/l2SqeZRceZHENmH2U.gif)
 
+No databases required, the favorited gifs are stored in local storage (Cache of your browser).
+
 You can use & test the [online version](shug0.github.io/giphy_companion/) hosted by Github Pages.<br>
 
 ### Build with *Create React App*
