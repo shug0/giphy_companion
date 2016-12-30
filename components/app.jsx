@@ -36,7 +36,7 @@ class App extends React.Component{
     componentDidMount() {
 
         if (this.state.favoritedGifIds.length > 0) {
-            const url = 'https://api.giphy.com/v1/gifs?api_key=dc6zaTOxFJmzC&ids=' + this.state.favoritedGifIds.join(',');
+            const url = 'https://api.giphy.com/v1/gifs?limit=100&api_key=dc6zaTOxFJmzC&ids=' + this.state.favoritedGifIds.join(',');
 
             $.get(url, (json) => {
                 this.setState({
@@ -65,7 +65,7 @@ class App extends React.Component{
             hasSearched: true
         });
 
-        const url = `https://api.giphy.com/v1/gifs/search?q=${searchValue}&api_key=dc6zaTOxFJmzC`;
+        const url = `https://api.giphy.com/v1/gifs/search?limit=100&q=${searchValue}&api_key=dc6zaTOxFJmzC`;
 
         $.get(url, (json) => {
             this.setState({
