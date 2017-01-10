@@ -21,24 +21,28 @@ class App extends React.Component{
             hasSearched: false,
             favoriteWindowIsOpen: false,
             favoritedGifIds: JSON.parse(localStorage.getItem('favoritedGifsIds')) || [],
-            favoritedGifs: []
+            favoritedGifs: [],
+            searchStr: '',
+            page: 1
         };
 
         this.searchChangedHandler = this.searchChangedHandler.bind(this);
+        this.handleSearch = this.handleSearch.bind(this);
         this.crossClickedHandler = this.crossClickedHandler.bind(this);
         this.onGifClicked = this.onGifClicked.bind(this);
         this.favoriteButtonIsClicked = this.favoriteButtonIsClicked.bind(this);
         this.keyPressed = this.keyPressed.bind(this);
+        this.handleScroll = this.handleScroll.bind(this);
 
         this.bodyElement = document.querySelector('body');
     }
 
     componentDidMount() {
 
-        if (this.state.favoritedGifIds.length > 0) {
-            const url = 'https://api.giphy.com/v1/gifs?limit=100&api_key=dc6zaTOxFJmzC&ids=' + this.state.favoritedGifIds.join(',');
+        window.addEventListener('scroll', this.handleScroll);
 
-            $.get(url, (json) => {
+        if (this.state.favoritedGifIds.length > 0) {
+            $.get(this.buildUrl('favorites'), (json) => {
                 this.setState({
                     favoritedGifs: json.data
                 })
@@ -48,8 +52,12 @@ class App extends React.Component{
         const { location: { query } } = this.props;
 
         if (query.search) {
-            this.searchChangedHandler(query.search);
+            this.setState({ searchStr: query.search }, this.handleSearch);
         }
+    }
+
+    componentWillUnmount() {
+        window.removeEventListener('scroll', this.handleScroll);
     }
 
     componentDidUpdate(prevProps, prevState) {
@@ -58,21 +66,62 @@ class App extends React.Component{
         }
     }
 
-    searchChangedHandler(searchValue) {
-        this.setState({
-            gifs: [],
-            loading: true,
-            hasSearched: true
-        });
+    handleScroll(evt) {
+        const windowHeight = "innerHeight" in window ? window.innerHeight : document.documentElement.offsetHeight;
+        const main = document.querySelector('main');
+        const html = document.documentElement;
+        const docHeight = Math.max(main.scrollHeight, main.offsetHeight, html.clientHeight,  html.scrollHeight, html.offsetHeight);
+        const windowBottom = windowHeight + window.pageYOffset;
+        if (this.state.gifs.length && windowBottom >= docHeight) {
+          this.setState({ page: this.state.page + 1 }, this.handleSearch);
+        }
+    }
 
-        const url = `https://api.giphy.com/v1/gifs/search?limit=100&q=${searchValue}&api_key=dc6zaTOxFJmzC`;
+    buildUrl(urlType) {
+      let url = 'https://api.giphy.com/v1/gifs';
+      const params = [{ key: 'api_key', value: 'dc6zaTOxFJmzC' }];
+      if (urlType === 'favorites') {
+          const { favoritedGifIds } = this.state;
+          params.push({ key: 'ids', value: favoritedGifIds.join(',') });
+      }
+      else if (urlType === 'search') {
+          const limit = 20;
+          const { searchStr, page } = this.state;
+          url += '/search';
+          params.push({ key: 'q', value: searchStr });
+          params.push({ key: 'limit', value: limit });
+          if (page > 1) {
+              params.push({ key: 'offset', value: (page-1) * limit });
+          }
+      }
+      const paramsStr = params
+          .map(({ key, value }) => `${key}=${value}`)
+          .join('&');
+      return `${url}?${paramsStr}`;
+    }
 
-        $.get(url, (json) => {
-            this.setState({
-                gifs: json.data,
-                loading: false
-            })
-        })
+    searchChangedHandler(searchStr) {
+        this.setState({ searchStr, page: 1, gifs: [] }, this.handleSearch);
+    }
+
+    handleSearch() {
+
+      const { gifs } = this.state;
+
+      this.setState({
+          loading: true,
+          hasSearched: true
+      });
+
+      $.get(this.buildUrl('search'), (json) => {
+          this.setState({
+              gifs: [
+                ...gifs,
+                ...json.data
+              ],
+              loading: false
+          })
+      });
     }
 
     crossClickedHandler() {
@@ -126,6 +175,8 @@ class App extends React.Component{
             hasSearched
         } = this.state;
 
+        console.log(gifs.length);
+
         const { location: { query } } = this.props;
 
         const defaultSearch = query && query.search ? query.search : '';
@@ -145,6 +196,7 @@ class App extends React.Component{
                 <GifList
                     gifs={gifs}
                     favoritedGifs={favoritedGifIds}
+                    searchHandler={this.handleSearch}
                     status={{
                         loading: loading,
                         hasSearched: hasSearched
